@@ -1,4 +1,4 @@
-import background from './Bg.png'
+import background from './Bg.jpg'
 
 
 export {
