@@ -3,6 +3,8 @@ import { background } from '../assets/assets'
 import Navbar from '../Components/Navbar'
 import InputBox from '../Components/InputBox'
 import ChatArea from '../Components/ChatArea'
+
+
 const Chat = () => {
 
   return (
