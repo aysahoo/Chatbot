@@ -12,16 +12,11 @@ const Chat = () => {
     alt="background"
     className="absolute w-full h-full object-cover"
   />
-  <div className="relative z-10 flex flex-col h-full pb-16">
+  <div className="relative z-10 flex flex-col h-full">
     <Navbar />
     <div className="flex-1 p-4 overflow-y-auto chat-area">
       {/* Chat area */}
     </div>
-  </div>
-  <div
-    className="fixed bottom-0 left-0 w-full z-20"
-    style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-  >
     <InputBox />
   </div>
 </div>

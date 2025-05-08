@@ -19,7 +19,7 @@ const InputBox = () => {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 m-4 mb-6 h-16 flex items-center rounded-full bg-white/10 backdrop-blur-xl pl-4 pr-3">
+    <div className="sticky bottom-0 left-0 right-0 m-4 mb-6 h-16 flex items-center rounded-full bg-white/10 backdrop-blur-xl pl-4 pr-3">
       <button className="h-10 w-10 flex items-center justify-center text-white text-sm">
         <Focus />
       </button>
