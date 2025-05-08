@@ -11,7 +11,7 @@ const Chat = () => {
   };
 
   return (
-<div className="relative w-full h-screen">
+<div className="relative w-full h-dvh">
   <img
     src={background}
     alt="background"
