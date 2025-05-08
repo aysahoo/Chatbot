@@ -6,7 +6,7 @@ import InputBox from '../Components/InputBox'
 const Chat = () => {
 
   return (
-<div className="relative w-full h-dvh">
+<div className="relative w-full" style={{ height: '100svh' }}>
   <img
     src={background}
     alt="background"
@@ -14,7 +14,7 @@ const Chat = () => {
   />
   <div className="relative z-10 flex flex-col h-full pb-16">
     <Navbar />
-    <div className="flex-1 p-4 overflow-y-auto">
+    <div className="flex-1 p-4 overflow-y-auto chat-area">
       {/* Chat area */}
     </div>
   </div>
