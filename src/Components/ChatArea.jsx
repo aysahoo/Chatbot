@@ -24,31 +24,26 @@ const messages = [
 ]
 
 const ChatArea = () => {
-  return (
-    <div className="gap-4 p-3 rounded-xl max-h-[80vh] overflow-y-auto ">
-      {messages.map(({ id, user, text, isUser }) => (
-        <div
-          key={id}
-          className={`flex items-start gap-3 ${isUser ? 'justify-end' : ''}`}
-        >
-          {!isUser && (
-            <div className="" />
-          )}
-          <div className={`flex flex-col gap-1 ${isUser ? 'items-end' : ''}`}>
-            <p className="text-sm text-white/70">{user}</p>
+    return (
+        <div className="gap-4 p-3 rounded-xl pb-28 overflow-y-auto">
+          {messages.map(({ id, user, text, isUser }) => (
             <div
-              className={`px-4 py-2 rounded-2xl text-white shadow ${isUser ? '' : 'bg-white/10'}`}
+              key={id}
+              className={`flex items-start gap-3 ${isUser ? 'justify-end' : ''}`}
             >
-              {text}
+              <div className={`flex flex-col gap-1 ${isUser ? 'items-end' : ''}`}>
+                <p className="text-sm text-white/70">{user}</p>
+                <div
+                  className={`px-4 py-2 rounded-2xl text-white shadow ${isUser ? '' : 'bg-white/10'}`}
+                >
+                  {text}
+                </div>
+              </div>
             </div>
-          </div>
-          {isUser && (
-            <div className="" />
-          )}
+          ))}
         </div>
-      ))}
-    </div>
-  )
+      );
+      
 }
 
 export default ChatArea
