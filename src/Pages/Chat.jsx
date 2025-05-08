@@ -6,7 +6,7 @@ import InputBox from '../Components/InputBox'
 const Chat = () => {
 
   return (
-<div className="relative w-full h-dvh">
+<div className="relative w-full h-svh">
   <img
     src={background}
     alt="background"
