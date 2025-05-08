@@ -3,7 +3,7 @@ import { GalleryVerticalEnd, User } from 'lucide-react'
 
 const Navbar = () => {
   return (
-  <div className="flex items-center justify-between px-6 pt-8 ">
+  <div className="flex items-center justify-between px-6 pt-6 ">
     <div className="w-8 h-8 flex items-center justify-center text-gray-200">
       <User size={28} />
     </div>
