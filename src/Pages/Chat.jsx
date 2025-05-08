@@ -12,7 +12,7 @@ const Chat = () => {
     alt="background"
     className="absolute w-full h-full object-cover brightness-50"
   />
-  <div className='relative z-10 flex flex-col h-full'>
+  <div className='relative z-10 flex flex-col h-dvh'>
   <div>
     <Navbar />
   </div>
