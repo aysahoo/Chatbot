@@ -3,11 +3,8 @@ import { Focus, SendHorizonal, AudioLines } from 'lucide-react'
 import AudioInput from './AudioInput'
 import { useChatbot } from '../config/context'
 import axios from 'axios'
-import { config } from 'dotenv'
 
-config();
-
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const InputBox = () => {
   const [input, setInput] = useState('');
