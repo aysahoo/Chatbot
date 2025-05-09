@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GalleryVerticalEnd } from 'lucide-react'
 import { NavLink } from 'react-router'
-import { useChatbot } from '../config/context';
 
 const Navbar = () => {
 
