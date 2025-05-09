@@ -16,13 +16,25 @@ function getInitialConversations() {
   }];
 }
 
+// Add function to get initial user name from localStorage
+function getInitialUserName() {
+  return localStorage.getItem('chat-username') || '';
+}
+
 export const ChatbotProvider = ({ children }) => {
   const [conversations, setConversations] = useState(getInitialConversations);
   const [activeId, setActiveId] = useState(conversations[0]?.id);
+  const [loading, setLoading] = useState(false);
+  const [userName, setUserName] = useState(getInitialUserName);
 
   useEffect(() => {
     localStorage.setItem('chat-conversations', JSON.stringify(conversations));
   }, [conversations]);
+
+  // Save userName to localStorage when it changes
+  useEffect(() => {
+    if (userName) localStorage.setItem('chat-username', userName);
+  }, [userName]);
 
   // Get the active conversation
   const activeConversation = conversations.find(c => c.id === activeId);
@@ -97,7 +109,11 @@ export const ChatbotProvider = ({ children }) => {
       addMessage,
       createConversation,
       deleteConversation,
-      getOpenAIMessages
+      getOpenAIMessages,
+      loading,
+      setLoading,
+      userName,
+      setUserName
     }}>
       {children}
     </ChatbotContext.Provider>

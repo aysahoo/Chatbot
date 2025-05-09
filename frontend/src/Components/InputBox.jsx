@@ -8,11 +8,13 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const InputBox = () => {
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { addMessage, getOpenAIMessages, activeConversation, createConversation } = useChatbot();
+  const { addMessage, getOpenAIMessages, activeConversation, createConversation, loading, setLoading } = useChatbot();
+  const MAX_LENGTH = 100;
 
   const handleInputChange = (e) => {
-    setInput(e.target.value)
+    if (e.target.value.length <= MAX_LENGTH) {
+      setInput(e.target.value);
+    }
   }
 
   const sendMessage = async () => {
@@ -68,8 +70,8 @@ const InputBox = () => {
       id: Date.now() + '-user',
     };
     addMessage(userMessage);
-    setLoading(true);
     setInput('');
+    setLoading(true);
     try {
       const response = await axios.post(
         `${BACKEND_URL}/chat`,
@@ -111,7 +113,7 @@ const InputBox = () => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 m-4 mb-6 h-16 flex items-center rounded-full bg-white/10 backdrop-blur-xl pl-4 pr-3">
+    <div className="fixed bottom-0 max-w-[600px] left-0  sm:left-1/2 sm:-translate-x-1/2 right-0 m-4 mb-6 h-16 flex items-center rounded-full bg-white/10 backdrop-blur-xl pl-4 pr-3">
       <button className="h-10 w-10 flex items-center justify-center text-white text-sm">
         <Focus />
       </button>
@@ -123,7 +125,9 @@ const InputBox = () => {
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
         disabled={loading}
+        maxLength={MAX_LENGTH}
       />
+      <span className="text-xs text-white/60 ml-2 w-16 text-right font-sans font-light select-none">{input.length}/{MAX_LENGTH}</span>
       <div className="h-10 w-10 flex items-center justify-center text-white transition text-sm">
         {input && !loading
           ? <button onClick={sendMessage}><SendHorizonal /></button>

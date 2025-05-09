@@ -19,12 +19,6 @@ const History = () => {
 
   return (
     <div className="relative w-full h-svh overflow-hidden">
-      {/* Background Image */}
-      <img
-        src={background}
-        alt="background"
-        className="absolute inset-0 w-full h-full object-cover brightness-50"
-      />
       {/* Content */}
       <div className="relative z-10 p-7 pt-10 flex flex-col gap-8 h-full text-white">
         <div className="flex items-center justify-between">

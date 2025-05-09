@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 body {
-  font-family: 'Playfair Display', serif;
-  /* font-family: 'Raleway', sans-serif; */
+  /* font-family: 'Playfair Display', serif; */
+  font-family: 'Raleway', sans-serif;
+  background-color: black;
 }
+

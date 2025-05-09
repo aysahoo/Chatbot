@@ -3,7 +3,7 @@ import { useChatbot } from '../config/context'
 import Welcome from './Welcome'
 
 const ChatArea = () => {
-  const { activeConversation } = useChatbot();
+  const { activeConversation, loading } = useChatbot();
   const messages = activeConversation?.messages || [];
   const bottomRef = useRef(null);
 
@@ -25,7 +25,7 @@ const ChatArea = () => {
           className={`flex items-start gap-3 ${isUser ? 'justify-end' : ''}`}
         >
           <div className={`flex flex-col gap-1 ${isUser ? 'items-end' : ''}`}>
-            <p className="text-sm text-white/70">{user}</p>
+            <p className="text-sm pr-3 mt-3 text-white/70">{user}</p>
             <div
               className={`px-4 py-2 rounded-2xl text-white shadow ${isUser ? '' : 'bg-white/10'}`}
             >
@@ -34,6 +34,16 @@ const ChatArea = () => {
           </div>
         </div>
       ))}
+      {loading && (
+        <div className="flex items-start gap-3">
+          <div className="flex flex-col gap-1">
+            <p className="text-sm text-white/70">Bot</p>
+            <div className="px-4 py-2 text-white">
+              Thinking...
+            </div>
+          </div>
+        </div>
+      )}
       <div ref={bottomRef} />
     </div>
   );
