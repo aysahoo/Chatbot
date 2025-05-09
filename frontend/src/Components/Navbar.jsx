@@ -1,47 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { GalleryVerticalEnd } from 'lucide-react'
 import { NavLink } from 'react-router'
+import { useChatbot } from '../config/context';
 
 const Navbar = () => {
-  const [location, setLocation] = useState({ city: 'Welcome', country: 'User', temperature: null })
-
-  useEffect(() => {
-    async function fetchLocationAndWeather() {
-      try {
-        // Get location data
-        const locRes = await fetch('https://ipapi.co/json/')
-        const locData = await locRes.json()
-        const { city, country_name, latitude, longitude } = locData
-
-        let temperature = null
-        if (latitude && longitude) {
-          // Get weather data
-          const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`)
-          const weatherData = await weatherRes.json()
-          temperature = weatherData.current_weather?.temperature
-        }
-
-        setLocation({
-          city,
-          country: country_name,
-          temperature
-        })
-      } catch (error) {
-        setLocation({ city: 'Unknown', country: '', temperature: null })
-      }
-    }
-
-    fetchLocationAndWeather()
-  }, [])
 
   return (
     <div className="flex items-center justify-between px-6 pt-8 pb-3">
       <div className="text-gray-200">
         {/* Place and temperature */}
         <span>
-          {location.city}, {location.country}
+          Bhubaneswar, India
           {location.temperature !== null && (
-            <span className="font-sans font-extralight"> • {location.temperature}°C</span>
+            <span className="font-sans font-extralight"> • 30°C</span>
           )}
         </span>
       </div>
