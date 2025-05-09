@@ -13,7 +13,7 @@ const AudioInput = ({ onResult }) => {
     }
     if (!recognitionRef.current) {
       recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
+      recognitionRef.current.continuous = true;
       recognitionRef.current.interimResults = true;
       recognitionRef.current.lang = 'en-US';
       recognitionRef.current.onresult = (event) => {
@@ -49,14 +49,19 @@ const AudioInput = ({ onResult }) => {
     }
   };
 
+  const handleClick = () => {
+    if (listening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  };
+
   return (
     <button
       className="h-10 w-10 flex items-center justify-center text-white"
-      onMouseDown={startListening}
-      onMouseUp={stopListening}
-      onTouchStart={startListening}
-      onTouchEnd={stopListening}
-      aria-label={listening ? "Listening..." : "Hold to speak"}
+      onClick={handleClick}
+      aria-label={listening ? "Listening..." : "Click to stop"}
       style={{ background: listening ? "#ef4444" : "transparent" }}
     >
       <AudioLines />
