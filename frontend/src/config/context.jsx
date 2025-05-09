@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const ChatbotContext = createContext();
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 function getInitialConversations() {
   const saved = localStorage.getItem('chat-conversations');
   if (saved) return JSON.parse(saved);
@@ -46,7 +48,7 @@ export const ChatbotProvider = ({ children }) => {
             role: msg.isUser ? 'user' : 'assistant',
             content: msg.text,
           }));
-          const res = await axios.post('http://localhost:5001/summarize', { messages: openAIMessages });
+          const res = await axios.post(`${BACKEND_URL}/summarize`, { messages: openAIMessages });
           const newTitle = res.data.title;
           setConversations(convs =>
             convs.map(c => c.id === activeId ? { ...c, title: newTitle } : c)

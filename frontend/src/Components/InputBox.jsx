@@ -3,6 +3,11 @@ import { Focus, SendHorizonal, AudioLines } from 'lucide-react'
 import AudioInput from './AudioInput'
 import { useChatbot } from '../config/context'
 import axios from 'axios'
+import { config } from 'dotenv'
+
+config();
+
+const BACKEND_URL = process.env.BACKEND_URL;
 
 const InputBox = () => {
   const [input, setInput] = useState('');
@@ -27,7 +32,7 @@ const InputBox = () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          'http://localhost:5001/chat',
+          `${BACKEND_URL}/chat`,
           {
             messages: [
               { role: 'user', content: userMessage.text },
@@ -70,7 +75,7 @@ const InputBox = () => {
     setInput('');
     try {
       const response = await axios.post(
-        'http://localhost:5001/chat',
+        `${BACKEND_URL}/chat`,
         {
           messages: [
             ...getOpenAIMessages(),
