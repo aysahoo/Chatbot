@@ -1,44 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { background } from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
+import { useChatbot } from '../config/context'
 
 const History = () => {
   const navigate = useNavigate();
-  const [showDelete, setShowDelete] = useState(null);
-
-  // Sample chatbot conversation history
-  const conversations = [
-    {
-      id: 1,
-      title: 'React Development Help',
-      date: '2024-03-20',
-      lastMessage: 'How do I implement custom hooks?',
-      messages: 24
-    },
-    {
-      id: 2,
-      title: 'JavaScript Debugging',
-      date: '2024-03-19',
-      lastMessage: 'Fixed the async/await issue',
-      messages: 15
-    },
-    {
-      id: 3,
-      title: 'CSS Styling Questions',
-      date: '2024-03-18',
-      lastMessage: 'Understanding Tailwind classes',
-      messages: 32
-    }
-  ]
+  const { conversations, setActiveId, deleteConversation, createConversation } = useChatbot();
 
   const handleChatClick = (chatId) => {
-    navigate(`/`);
+    setActiveId(chatId);
+    navigate(`/`); // Go to chat page
   }
 
   const handleDelete = (e, chatId) => {
     e.stopPropagation();
-    // Add your delete logic here
-    console.log('Deleting chat:', chatId);
+    deleteConversation(chatId);
   }
 
   return (
@@ -51,8 +27,22 @@ const History = () => {
       />
       {/* Content */}
       <div className="relative z-10 p-7 pt-10 flex flex-col gap-8 h-full text-white">
-        <div className="text-5xl">History</div>
+        <div className="flex items-center justify-between">
+          <div className="text-5xl">History</div>
+          <button
+            onClick={() => {
+              createConversation('New Conversation');
+              navigate('/');
+            }}
+            className="bg-white/20 px-4 py-2 rounded text-white hover:bg-white/30 transition-colors"
+          >
+            + New Chat
+          </button>
+        </div>
         <div className="space-y-4">
+          {conversations.length === 0 && (
+            <div className="text-white/70">No chat history found.</div>
+          )}
           {conversations.map((chat) => (
             <div 
               key={chat.id}
@@ -62,11 +52,11 @@ const History = () => {
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <h3 className="text-lg font-medium text-white">{chat.title}</h3>
-                  <p className="text-white/70 text-sm mt-1">{chat.lastMessage}</p>
+                  <p className="text-white/70 text-sm mt-1">{chat.messages[chat.messages.length-1]?.text || ''}</p>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="text-white/50 text-xs">{chat.date}</span>
+                    <span className="text-white/50 text-xs">{new Date(Number(chat.id)).toLocaleDateString()}</span>
                     <span className="text-white/50 text-xs">•</span>
-                    <span className="text-white/50 text-xs">{chat.messages} messages</span>
+                    <span className="text-white/50 text-xs">{chat.messages.length} messages</span>
                   </div>
                 </div>
                 <button 
